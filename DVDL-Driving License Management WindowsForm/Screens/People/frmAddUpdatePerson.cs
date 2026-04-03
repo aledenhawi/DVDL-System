@@ -51,6 +51,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens
                     try
                     {
                         File.Delete(_Person.ImagePath);
+                        _Person.ImagePath = "";
                     }
                     catch (Exception)
                     {
@@ -206,7 +207,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens
         private void btnSave_Click(object sender, EventArgs e)
         {
             // Check Validation
-            if (!this.ValidateChildren()) 
+            if (!ValidateChildren())
             {
                 MessageBox.Show("Some failds are not valid , put the mouse over the red icon to see details", "Not Valid Failds", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -218,6 +219,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens
             // Full Person Object With Info 
             int NationalityCountryID = clsCountry.Find(cbCountries.Text.ToString()).ID;
 
+            
             _Person.Address = txbAddress.Text.Trim();
             _Person.FirstName = txbFirstName.Text.Trim();
             _Person.SecondName = txbSecondName.Text.Trim();

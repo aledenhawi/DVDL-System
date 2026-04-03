@@ -14,7 +14,7 @@ namespace DVDL_BusinessLayer
     public class clsPerson
     {
         public enum enMode { AddNew = 0, Update = 1 };
-        private enMode Mode = enMode.AddNew;
+        private enMode _Mode = enMode.AddNew;
 
         public enum GenderType : byte
         {
@@ -53,7 +53,7 @@ namespace DVDL_BusinessLayer
             DateOfBirth = DateTime.Now;
             ImagePath = "";
             NationalityCountryID = -1;
-            Mode = enMode.AddNew;
+            _Mode = enMode.AddNew;
         }
         private clsPerson(int ID, string FirstName, string SecondName, string ThirdName, string LastName, byte Gender, string NationalNo, string Email,
             string Phone, string Address, DateTime DateOfBirth, string ImagePath, int NationalityCountryID)
@@ -72,7 +72,7 @@ namespace DVDL_BusinessLayer
             this.ImagePath = ImagePath;
             this.NationalityCountryID = NationalityCountryID;
             this.CountryInfo = clsCountry.Find(NationalityCountryID);
-            Mode = enMode.Update;
+            _Mode = enMode.Update;
         }
 
         public static clsPerson Find(int ID)
@@ -109,8 +109,6 @@ namespace DVDL_BusinessLayer
             this.ID = DVDL_DataAccessLayer.clsPersonData.AddNewPerson(this.FirstName, this.SecondName, this.ThirdName, this.LastName, this.NationalNo,
                 this.Email, this.Phone, this.Address, this.DateOfBirth, this.ImagePath, this.NationalityCountryID, (byte)this.Gender);
 
-            this.Mode = (ID != -1) ? enMode.Update : enMode.AddNew;
-
             return (ID != 1);
         }
 
@@ -122,15 +120,32 @@ namespace DVDL_BusinessLayer
 
         public bool Save()
         {
-            if (Mode == enMode.AddNew)
+            switch (_Mode)
             {
-                return _AddNewPerson();
+                case enMode.AddNew:
+                    if (_AddNewPerson())
+                    {
+                        _Mode = enMode.Update;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case enMode.Update:
+                    if (_Update())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                    return false;
             }
-            else
-                return _Update();
+
         }
-
-
 
         public static bool DeletePerson(int ID)
         {

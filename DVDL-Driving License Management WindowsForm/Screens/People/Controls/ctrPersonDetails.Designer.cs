@@ -113,7 +113,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Tahoma", 10F);
             this.linkLabel1.LinkColor = System.Drawing.Color.DarkBlue;
-            this.linkLabel1.Location = new System.Drawing.Point(814, 58);
+            this.linkLabel1.Location = new System.Drawing.Point(814, 60);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(128, 21);
             this.linkLabel1.TabIndex = 47;
@@ -294,7 +294,7 @@
             // lblPersonID
             // 
             this.lblPersonID.AutoSize = true;
-            this.lblPersonID.Location = new System.Drawing.Point(185, 37);
+            this.lblPersonID.Location = new System.Drawing.Point(137, 37);
             this.lblPersonID.Name = "lblPersonID";
             this.lblPersonID.Size = new System.Drawing.Size(21, 24);
             this.lblPersonID.TabIndex = 9;

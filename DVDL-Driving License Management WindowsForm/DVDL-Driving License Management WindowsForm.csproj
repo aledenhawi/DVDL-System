@@ -36,7 +36,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,16 +51,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Screens\frmMain.cs">
+    <Compile Include="Global Classes\clsGlobal.cs" />
+    <Compile Include="Global Classes\clsUtil.cs" />
+    <Compile Include="Screens\Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Screens\frmMain.Designer.cs">
+    <Compile Include="Screens\Login\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Users\Controls\ctrUserDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Screens\Users\Controls\ctrUserDetails.Designer.cs">
+      <DependentUpon>ctrUserDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Users\frmAddNewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Users\frmAddNewUser.Designer.cs">
+      <DependentUpon>frmAddNewUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Users\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Users\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Users\frmUserDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Users\frmUserDetails.Designer.cs">
+      <DependentUpon>frmUserDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Users\frmUsersManagment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Users\frmUsersManagment.Designer.cs">
+      <DependentUpon>frmUsersManagment.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\People\frmAddUpdatePerson.cs">
       <SubType>Form</SubType>
@@ -98,7 +138,10 @@
     <Compile Include="Screens\People\Controls\ctrPersonDetailsWithFilter.Designer.cs">
       <DependentUpon>ctrPersonDetailsWithFilter.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Screens\frmMain.resx">
+    <EmbeddedResource Include="Screens\Login\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\People\frmAddUpdatePerson.resx">
@@ -124,6 +167,21 @@
     <EmbeddedResource Include="Screens\People\Controls\ctrPersonDetailsWithFilter.resx">
       <DependentUpon>ctrPersonDetailsWithFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Users\Controls\ctrUserDetails.resx">
+      <DependentUpon>ctrUserDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Users\frmAddNewUser.resx">
+      <DependentUpon>frmAddNewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Users\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Users\frmUsersManagment.resx">
+      <DependentUpon>frmUsersManagment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Users\frmUserDetails.resx">
+      <DependentUpon>frmUserDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -148,10 +206,6 @@
     <ProjectReference Include="..\DVDL-BusinessLayer\DVLD-BusinessLayer.csproj">
       <Project>{4e5e7df6-a502-4b61-8a43-9fa1445d8b5d}</Project>
       <Name>DVLD-BusinessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DVLD_Classes\DVLD_Classes.csproj">
-      <Project>{9c10981a-ebd6-4071-8331-ef30db0ffb68}</Project>
-      <Name>DVLD_Classes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +275,48 @@
     <None Include="Resources\search Pesron.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="User Controls\" />
+    <None Include="Resources\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsersWithColors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\account-settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurrentUserInfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Changepassword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo_2026-03-27_17-48-08.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo_2026-03-27_17-48-05.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenEye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Usermanagement.png" />
+    <None Include="Resources\add-user.png" />
+    <None Include="Resources\Next.png" />
+    <None Include="Resources\Next 32.png" />
+    <None Include="Resources\Next 32px.png" />
+    <Content Include="Screens\Login\LogFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

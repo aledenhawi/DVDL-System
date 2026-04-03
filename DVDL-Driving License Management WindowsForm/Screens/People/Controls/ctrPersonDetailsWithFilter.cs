@@ -142,5 +142,12 @@ namespace DVDL_Driving_License_Management_WindowsForm.User_Controls
             if(cmbFilterType.Text == "PersonID")
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+    
+        public void ResetPersonInfo() 
+        {
+            cmbFilterType.SelectedIndex = 0;
+            txbFilterText.Text = "";
+            ctrPersonDetails2.ResetPersonInfo();
+        }
     }
 }

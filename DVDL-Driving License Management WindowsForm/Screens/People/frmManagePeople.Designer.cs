@@ -40,10 +40,10 @@
             this.tsPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbPeopleFiltring = new System.Windows.Forms.ComboBox();
-            this.txbFiltringPeople = new System.Windows.Forms.TextBox();
             this.lblTotalRecords = new System.Windows.Forms.Label();
             this.btnAddNewPerson = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txbFiltringPeople = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeopleList)).BeginInit();
             this.cmsPeopleList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -176,17 +176,6 @@
             this.cmbPeopleFiltring.TabIndex = 4;
             this.cmbPeopleFiltring.SelectedValueChanged += new System.EventHandler(this.cmbPeopleFiltring_SelectedValueChanged);
             // 
-            // txbFiltringPeople
-            // 
-            this.txbFiltringPeople.Location = new System.Drawing.Point(310, 281);
-            this.txbFiltringPeople.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.txbFiltringPeople.Name = "txbFiltringPeople";
-            this.txbFiltringPeople.Size = new System.Drawing.Size(196, 24);
-            this.txbFiltringPeople.TabIndex = 5;
-            this.txbFiltringPeople.Visible = false;
-            this.txbFiltringPeople.TextChanged += new System.EventHandler(this.txbFiltringPeople_TextChanged);
-            this.txbFiltringPeople.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbFiltringPeople_KeyPress);
-            // 
             // lblTotalRecords
             // 
             this.lblTotalRecords.AutoSize = true;
@@ -226,6 +215,17 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // txbFiltringPeople
+            // 
+            this.txbFiltringPeople.Location = new System.Drawing.Point(310, 281);
+            this.txbFiltringPeople.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.txbFiltringPeople.Name = "txbFiltringPeople";
+            this.txbFiltringPeople.Size = new System.Drawing.Size(196, 24);
+            this.txbFiltringPeople.TabIndex = 5;
+            this.txbFiltringPeople.Visible = false;
+            this.txbFiltringPeople.TextChanged += new System.EventHandler(this.txbFiltringPeople_TextChanged);
+            this.txbFiltringPeople.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbFiltringPeople_KeyPress);
+            // 
             // frmManagePeople
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -261,7 +261,6 @@
         private System.Windows.Forms.DataGridView dgvPeopleList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbPeopleFiltring;
-        private System.Windows.Forms.TextBox txbFiltringPeople;
         private System.Windows.Forms.Label lblTotalRecords;
         private System.Windows.Forms.Button btnAddNewPerson;
         private System.Windows.Forms.ContextMenuStrip cmsPeopleList;
@@ -271,5 +270,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsDelete;
         private System.Windows.Forms.ToolStripMenuItem tsSendEmail;
         private System.Windows.Forms.ToolStripMenuItem tsPhoneCall;
+        private System.Windows.Forms.TextBox txbFiltringPeople;
     }
 }

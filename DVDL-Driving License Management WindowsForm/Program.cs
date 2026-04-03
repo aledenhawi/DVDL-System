@@ -1,4 +1,7 @@
-﻿using DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens;
+﻿using DVDL_Driving_License_Management_WindowsForm.Screens;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Basic;
+using DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +20,7 @@ namespace DVDL_Driving_License_Management_WindowsForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new frmLogin());
         }
     }
 }

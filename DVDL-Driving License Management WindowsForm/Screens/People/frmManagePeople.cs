@@ -88,6 +88,7 @@ namespace DVDL_Driving_License_Management_WindowsForm
         {
             if (PeopleDataTable == null) return;
 
+
             txbFiltringPeople.Visible = (cmbPeopleFiltring.Text == "None") ? false : true;
        
             if(txbFiltringPeople.Visible)
@@ -140,6 +141,9 @@ namespace DVDL_Driving_License_Management_WindowsForm
                 case "Email":
                     FilterColumn = "Email";
                     break;
+                case "Country Name":
+                    FilterColumn = "CountryName";
+                    break;
                 default:
                     break;
             }
@@ -153,7 +157,7 @@ namespace DVDL_Driving_License_Management_WindowsForm
 
             if(FilterColumn == "PersonID")
             {
-                PeopleDataTable.DefaultView.RowFilter = $"{FilterColumn} = '%{term}%'";
+                PeopleDataTable.DefaultView.RowFilter = $"{FilterColumn} = {term}";
             }
             else 
             {

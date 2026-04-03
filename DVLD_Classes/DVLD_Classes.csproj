@@ -41,8 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsSystemSettings.cs" />
     <Compile Include="clsUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DVDL-BusinessLayer\DVLD-BusinessLayer.csproj">
+      <Project>{4e5e7df6-a502-4b61-8a43-9fa1445d8b5d}</Project>
+      <Name>DVLD-BusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
