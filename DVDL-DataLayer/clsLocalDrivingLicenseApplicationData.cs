@@ -128,7 +128,7 @@ namespace DVDL_DataLayer
             int RowsAffected = 0;
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = @"Update LocalDrivingLicenseApplication 
+            string Query = @"Update LocalDrivingLicenseApplications
                              set LicenseClassID = @LicenseClassID
                              Where LocalDrivingLicenseApplicationID = @ID;";
 
@@ -139,6 +139,7 @@ namespace DVDL_DataLayer
             // add with value for update
 
             command.Parameters.Add("@ID", SqlDbType.Int).Value = ID;
+            command.Parameters.Add("@LicenseClassID", SqlDbType.Int).Value = LicenseClassID;
 
             try
             {

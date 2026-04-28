@@ -62,7 +62,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
                 
                 cmbLicenseClasses.SelectedIndex = 2;
                 lblApplicationDate.Text = DateTime.Now.ToShortDateString();
-                lblApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.NewDrivingLicense).Fees.ToString();
+                lblApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.NewLocalDrivingLicense).Fees.ToString();
                 lblCreatedByUser.Text = clsGlobal.CurrentUser.Username;
             }
             else
@@ -154,11 +154,11 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
         {
             short Age = clsPerson.Find(ctrPersonDetailsWithFilter1.PersonID).CalculateAge();
 
-            
 
-            int ActiveApplicationID = clsApplication.GetActiveApplicationIDForLicenseClass(ctrPersonDetailsWithFilter1.PersonID, clsApplication.enApplicationType.NewDrivingLicense, Convert.ToInt32(cmbLicenseClasses.SelectedValue));
 
-            if (ActiveApplicationID == -1)
+            int ActiveApplicationID = clsApplication.GetActiveApplicationIDForLicenseClass(ctrPersonDetailsWithFilter1.PersonID, clsApplication.enApplicationType.NewLocalDrivingLicense, Convert.ToInt32(cmbLicenseClasses.SelectedValue));
+
+            if (ActiveApplicationID != -1)
             {
                 MessageBox.Show("The selected person already has an active application for the same license class.", "Duplicate Application", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close(); 
@@ -167,15 +167,17 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
             // Check (Add Checking if the person has a Driving license already)
 
 
-            _LocalDrivingLicenseApplication.ApplicantPersonID = ctrPersonDetailsWithFilter1.PersonID;
-            _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;
-            _LocalDrivingLicenseApplication.ApplicationTypeID = 1;
-            _LocalDrivingLicenseApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
-            _LocalDrivingLicenseApplication.PaidFees = Convert.ToSingle(lblApplicationFees.Text);
-            _LocalDrivingLicenseApplication.CreatedByUserID = clsGlobal.CurrentUser.ID;
             _LocalDrivingLicenseApplication.LicenseClassID = Convert.ToInt32(cmbLicenseClasses.SelectedValue);
             if (_Mode == enMode.Add)
+            {
+                _LocalDrivingLicenseApplication.ApplicantPersonID = ctrPersonDetailsWithFilter1.PersonID;
+                _LocalDrivingLicenseApplication.ApplicationTypeID = (int)clsApplication.enApplicationType.NewLocalDrivingLicense;
+                _LocalDrivingLicenseApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
+                _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;
                 _LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;
+                _LocalDrivingLicenseApplication.PaidFees = Convert.ToSingle(lblApplicationFees.Text);
+                _LocalDrivingLicenseApplication.CreatedByUserID = clsGlobal.CurrentUser.ID;
+            }
 
             _LocalDrivingLicenseApplication.LicenseClass = clsLicenseClasses.Find(_LocalDrivingLicenseApplication.LicenseClassID);
 
@@ -187,7 +189,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
 
             if (_LocalDrivingLicenseApplication.Save())
             {
-                lblApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationsID.ToString();
+                lblApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
                 // change mode to update after saving the new user
                 btnReset.Visible = false;
                 _Mode = enMode.Update;

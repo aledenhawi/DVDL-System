@@ -38,6 +38,7 @@ namespace DVDL_BusinessLayer
             AppoitmentDate = DateTime.Now;
             PaidFees = 0.0f;
             IsLocked = false;
+            _Mode = enMode.AddNew;
         }
 
         clsTestAppointment(int appointmentID, int testTypeID, int localDrivingLicenseID, DateTime appoitmentDate, float paidFees, int CreatedByUserID, bool isLocked)
@@ -49,6 +50,7 @@ namespace DVDL_BusinessLayer
             PaidFees = paidFees;
             IsLocked = isLocked;
             this.CreatedByUserID = CreatedByUserID;
+            _Mode = enMode.Update;
         }
 
         private bool _AddNew()
@@ -66,8 +68,12 @@ namespace DVDL_BusinessLayer
         {
             if (_Mode == enMode.AddNew)
             {
-                _Mode = enMode.Update;
-                return _AddNew();
+                if (_AddNew())
+                {
+                    _Mode = enMode.Update;
+                    return true;
+                }
+                return false;
             }
             else
             {

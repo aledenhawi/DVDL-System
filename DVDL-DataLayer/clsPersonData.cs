@@ -87,6 +87,7 @@ namespace DVDL_DataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string Query = "SELECT * FROM People WHERE PersonID = @ID";
+
             SqlCommand command = new SqlCommand(Query, Connection);
 
             command.Parameters.AddWithValue("@ID", ID);
@@ -94,6 +95,7 @@ namespace DVDL_DataAccessLayer
             try
             {
                 Connection.Open();
+
                 SqlDataReader Reader = command.ExecuteReader();
 
                 if (Reader.Read())
@@ -313,7 +315,7 @@ namespace DVDL_DataAccessLayer
                     {
                         connection.Open();
                         object Result = command.ExecuteScalar();
-                        int count = Convert.ToInt32(Result);
+                        short count = Convert.ToInt16(Result);
                         return count > 0;
                     }
                     catch (Exception ex)
@@ -336,7 +338,8 @@ namespace DVDL_DataAccessLayer
                     try
                     {
                         connection.Open();
-                        int count = (int)command.ExecuteScalar();
+                        object Result = command.ExecuteScalar();
+                        short count = Convert.ToInt16(Result);
                         return count > 0;
                     }
                     catch (Exception ex)

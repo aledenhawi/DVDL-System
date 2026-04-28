@@ -16,7 +16,8 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
 {
     public partial class frmTestsAppointments : Form
     {
-        int _LocalDrivingApplicationID { set; get; }
+        int _LocalDrivingLicenseApplicationID = 0;
+
         DataTable _AppointmentsTestDataTable;
 
 
@@ -25,20 +26,22 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
         public frmTestsAppointments(int ApplicationID, clsTestType.enTestType TestType)
         {
             InitializeComponent();
-            _LocalDrivingApplicationID = ApplicationID;
+            _LocalDrivingLicenseApplicationID = ApplicationID;
             this._TestType = TestType;
         }
 
         private void _FullDataGridView() 
         {
 
-             _AppointmentsTestDataTable = clsTestAppointment.GetAllTestAppointmentsForLocalDrivingLicenseApplicationID(_LocalDrivingApplicationID,(int)_TestType);
+             _AppointmentsTestDataTable = clsTestAppointment.GetAllTestAppointmentsForLocalDrivingLicenseApplicationID(_LocalDrivingLicenseApplicationID,(int)_TestType);
+
             if (_AppointmentsTestDataTable.Rows.Count == 0) 
             {
                 dgvTestAppointments.DataSource = null;
                 lblTotalRecords.Text = "0";
                 return; 
             }
+
             dgvTestAppointments.DataSource = _AppointmentsTestDataTable;
 
             if (dgvTestAppointments.Rows.Count > 0)
@@ -80,7 +83,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
 
         private void frmTestsAppointments_Load(object sender, EventArgs e)
         {
-            ctrLocalDrivingLicenseApplicationFullDetails1.LoadLDLApplicationDetails(_LocalDrivingApplicationID);
+            ctrLocalDrivingLicenseApplicationFullDetails1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
 
             _FullDataGridView();
             _SetPictureBoxImage();
@@ -98,12 +101,25 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
 
         private void btnAddNewAppointment_Click(object sender, EventArgs e)
         {
-            if (!clsLocalDrivingLicenseApplication.DoesPersonHaveActiveApplication(_LocalDrivingApplicationID, Convert.ToInt32(_TestType)))
+            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find(_LocalDrivingLicenseApplicationID);
+            if (!clsLocalDrivingLicenseApplication.DoesPersonHaveActiveApplication(LocalDrivingLicenseApplication.ApplicantPersonID, Convert.ToInt32(_TestType)))
             {
-                frmSchedualTest addNewTestAppointment = new frmSchedualTest(_LocalDrivingApplicationID, _TestType);
+                frmSchedualTest addNewTestAppointment = new frmSchedualTest(_LocalDrivingLicenseApplicationID, _TestType);
                 addNewTestAppointment.ShowDialog();
                 _FullDataGridView();
             }
+            else
+            { 
+                MessageBox.Show("Person already has an active application for this test , You cannot add new appointment.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void tsEdit_Click(object sender, EventArgs e)
+        {
+            frmSchedualTest schedualTest = new frmSchedualTest(_LocalDrivingLicenseApplicationID, _TestType, Convert.ToInt32(dgvTestAppointments.CurrentRow.Cells["TestAppointmentID"].Value));
+            schedualTest.ShowDialog();
+            _FullDataGridView();
         }
     }
 }

@@ -72,8 +72,12 @@ namespace DVDL_BusinessLayer
         {
             if (_Mode == enMode.AddNew)
             {
-                _Mode = enMode.Update;
-                return _AddNewType();
+                if (_AddNewType())
+                {
+                    _Mode = enMode.Update;
+                    return true;
+                }
+                return false;
             }
             else if (_Mode == enMode.Update)
             {

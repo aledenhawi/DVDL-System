@@ -10,14 +10,15 @@ namespace DVDL_DataLayer
 {
     public class clsTestAppointmentData
     {
-        public static int AddNewTestAppointment(int TestTypeID, int LocalDrivingLicenseID, DateTime AppoitmentDate, float PaidFees, int CreatedByUser, bool IsLocked)
+
+        public static int AddNewTestAppointment(int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, float PaidFees, int CreatedByUserID, bool IsLocked)
         {
-            int LocalDrivingLicenseApplicationsID = -1;
+            int TestAppointmentID = -1;
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = @"INSERT INTO LocalDrivingLicenseApplications (TestTypeID,LocalDrivingLicenseID,AppoitmentDate,PaidFees,CreatedByUser,IsLocked)
-                values(@AppointmentID,@TestTypeID,@LocalDrivingLicenseID,@AppoitmentDate,@PaidFees,@CreatedByUser,@IsLocked)
+            string Query = @"INSERT INTO TestAppointments (TestTypeID,LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,CreatedByUserID,IsLocked)
+                values(@TestTypeID,@LocalDrivingLicenseApplicationID,@AppointmentDate,@PaidFees,@CreatedByUserID,@IsLocked)
                 SELECT SCOPE_IDENTITY();";
 
 
@@ -26,10 +27,10 @@ namespace DVDL_DataLayer
             // add with value for insert
 
             command.Parameters.Add("@TestTypeID", SqlDbType.Int).Value = TestTypeID;
-            command.Parameters.Add("@LocalDrivingLicenseID", SqlDbType.Int).Value = LocalDrivingLicenseID;
-            command.Parameters.Add("@AppoitmentDate", SqlDbType.SmallDateTime).Value = AppoitmentDate;
+            command.Parameters.Add("@LocalDrivingLicenseApplicationID", SqlDbType.Int).Value = LocalDrivingLicenseApplicationID;
+            command.Parameters.Add("@AppointmentDate", SqlDbType.SmallDateTime).Value = AppointmentDate;
             command.Parameters.Add("@PaidFees", SqlDbType.SmallMoney).Value = PaidFees;
-            command.Parameters.Add("@CreatedByUser", SqlDbType.Int).Value = CreatedByUser;
+            command.Parameters.Add("@CreatedByUserID", SqlDbType.Int).Value = CreatedByUserID;
             command.Parameters.Add("@IsLocked", SqlDbType.Bit).Value = IsLocked;
 
 
@@ -41,7 +42,7 @@ namespace DVDL_DataLayer
 
                 if (result != null && int.TryParse(result.ToString(), out int InsertedID))
                 {
-                    LocalDrivingLicenseApplicationsID = InsertedID;
+                    TestAppointmentID = InsertedID;
                 }
             }
             catch (Exception ex)
@@ -53,10 +54,10 @@ namespace DVDL_DataLayer
                 Connection.Close();
             }
 
-            return LocalDrivingLicenseApplicationsID;
+            return TestAppointmentID;
         }
 
-        public static bool GetTestAppointmentInfoByID(int ID, ref int TestTypeID, ref int LocalDrivingLicenseID, ref DateTime AppoitmentDate, ref float PaidFees, ref int CreatedByUser, ref bool IsLocked)
+        public static bool GetTestAppointmentInfoByID(int ID, ref int TestTypeID, ref int LocalDrivingLicenseApplicationID, ref DateTime AppoitmentDate, ref float PaidFees, ref int CreatedByUser, ref bool IsLocked)
         {
             bool isFound = false;
 
@@ -75,10 +76,10 @@ namespace DVDL_DataLayer
                     if (Reader.Read())
                     {
                         TestTypeID = Convert.ToInt32(Reader["TestTypeID"]);
-                        LocalDrivingLicenseID = Convert.ToInt32(Reader["LocalDrivingLicenseID"]);
-                        AppoitmentDate = Convert.ToDateTime(Reader["AppoitmentDate"]);
+                        LocalDrivingLicenseApplicationID = Convert.ToInt32(Reader["LocalDrivingLicenseApplicationID"]);
+                        AppoitmentDate = Convert.ToDateTime(Reader["AppointmentDate"]);
                         PaidFees = Convert.ToSingle(Reader["PaidFees"]);
-                        CreatedByUser = Convert.ToInt32(Reader["CreatedByUser"]);
+                        CreatedByUser = Convert.ToInt32(Reader["CreatedByUserID"]);
                         IsLocked = Convert.ToBoolean(Reader["IsLocked"]);
 
                         isFound = true;
@@ -87,7 +88,6 @@ namespace DVDL_DataLayer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
             }
             finally
             {
@@ -96,17 +96,17 @@ namespace DVDL_DataLayer
             return isFound;
         }
 
-        public static bool UpdateTestAppointment(int ID, int TestTypeID, int LocalDrivingLicenseID, DateTime AppoitmentDate, float PaidFees, int CreatedByUser, bool IsLocked)
+        public static bool UpdateTestAppointment(int ID, int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, float PaidFees, int CreatedByUserID, bool IsLocked)
         {
             int RowsAffected = 0;
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string Query = @"Update TestAppointments 
                              set TestTypeID = @TestTypeID,
-                                 LocalDrivingLicenseID = @LocalDrivingLicenseID,
-                                 AppoitmentDate = @AppoitmentDate,
+                                 LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID,
+                                 AppointmentDate = @AppointmentDate,
                                  PaidFees = @PaidFees,
-                                 CreatedByUser = @CreatedByUser,
+                                 CreatedByUserID = @CreatedByUserID,
                                  IsLocked = @IsLocked
                              Where TestAppointmentID = @ID;";
 
@@ -117,10 +117,10 @@ namespace DVDL_DataLayer
 
             command.Parameters.Add("@ID", SqlDbType.Int).Value = ID;
             command.Parameters.Add("@TestTypeID", SqlDbType.Int).Value = TestTypeID;
-            command.Parameters.Add("@LocalDrivingLicenseID", SqlDbType.Int).Value = LocalDrivingLicenseID;
-            command.Parameters.Add("@AppoitmentDate", SqlDbType.SmallDateTime).Value = AppoitmentDate;
+            command.Parameters.Add("@LocalDrivingLicenseApplicationID", SqlDbType.Int).Value = LocalDrivingLicenseApplicationID;
+            command.Parameters.Add("@AppointmentDate", SqlDbType.SmallDateTime).Value = AppointmentDate;
             command.Parameters.Add("@PaidFees", SqlDbType.SmallMoney).Value = PaidFees;
-            command.Parameters.Add("@CreatedByUser", SqlDbType.Int).Value = CreatedByUser;
+            command.Parameters.Add("@CreatedByUserID", SqlDbType.Int).Value = CreatedByUserID;
             command.Parameters.Add("@IsLocked", SqlDbType.Bit).Value = IsLocked;
 
 

@@ -1,4 +1,5 @@
 ﻿using DVDL_BusinessLayer;
+using DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,9 +71,9 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
             if (LocalDrivingLicenseDataTable == null) return;
 
 
-            txbFiltringLDLApplications.Visible = (cmbLDLApplicationsFiltring.Text == "None") ? false : true;
+            txbFiltringLDLApplications.Enabled = (cmbLDLApplicationsFiltring.Text == "None") ? false : true;
 
-            if (txbFiltringLDLApplications.Visible)
+            if (txbFiltringLDLApplications.Enabled)
             {
                 txbFiltringLDLApplications.Text = string.Empty;
                 txbFiltringLDLApplications.Focus();
@@ -148,12 +149,27 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
             }
         }
 
+        private void tsDeleteApplication_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to delete this application?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                if (clsLocalDrivingLicenseApplication.DeleteLocalDrivingLicenseApplication((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value))
+                {
+                    MessageBox.Show("Application deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    frmLocalDrivingLicenseApplications_Load(null, null);
+                }
+                else
+                    MessageBox.Show("Failed to delete the application. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
         private void cancleApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Are you sure you want to cancle this application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to cancle this application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 clsLocalDrivingLicenseApplication clsLocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value);
-                if (clsLocalDrivingLicenseApplication.Cancle(clsLocalDrivingLicenseApplication.ApplicationID)) 
+                if (clsLocalDrivingLicenseApplication.Cancle(clsLocalDrivingLicenseApplication.ApplicationID))
                 {
                     MessageBox.Show("Application has been canclled successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmLocalDrivingLicenseApplications_Load(null, null);
@@ -162,14 +178,87 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
                 {
                     MessageBox.Show("Failed to cancle the application.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
             }
         }
 
-        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsShowApplicationDetails_Click(object sender, EventArgs e)
         {
-            frmLocalDrvingLicenseApplicationDetails localDrvingLicenseApplicationDetails = new frmLocalDrvingLicenseApplicationDetails((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value);
-            localDrvingLicenseApplicationDetails.ShowDialog();
+            frmLocalDrvingLicenseApplicationDetails frm = new frmLocalDrvingLicenseApplicationDetails((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value);
+            frm.ShowDialog();
         }
+
+        private void tsEditApplicatoin_Click(object sender, EventArgs e)
+        {
+            frmAddEditLocalDrivingLicenseApplication frmAddEditLocalDrivingLicenseApplication = new frmAddEditLocalDrivingLicenseApplication((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value);
+            frmAddEditLocalDrivingLicenseApplication.ShowDialog();
+            frmLocalDrivingLicenseApplications_Load(null, null);
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value;
+
+            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find(LocalDrivingLicenseApplicationID);
+
+            int totalPassedTests = localDrivingLicenseApplication.PassedTest;
+
+
+            // check it later
+            bool LicenseIssued = totalPassedTests == 3;
+
+
+            tsDeleteApplication.Enabled = !LicenseIssued;
+            tsShowPersonLicenseHistroy.Enabled = LicenseIssued;
+            tsShowLicense.Enabled = LicenseIssued;
+
+            tsCancleApplication.Enabled = (localDrivingLicenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New);
+
+            tsEditApplication.Enabled = !LicenseIssued && (localDrivingLicenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New);
+            tsIssueDrivingLicense.Enabled = !LicenseIssued && (totalPassedTests == 3);
+            tsSechduleTest.Enabled = !LicenseIssued;
+
+            visionTestToolStripMenuItem.Enabled = (totalPassedTests == 0) && (localDrivingLicenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New);
+            writtenTestToolStripMenuItem.Enabled = (totalPassedTests == 1);
+            streetTestToolStripMenuItem.Enabled = (totalPassedTests == 2);
+
+
+            // Check it Later if (tsScechduleTestMenu == true) then check before it wich stage he is in and in if body enable or disable the menu items
+
+        }
+
+        private void tsIssueDrivingLicense_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not implemented yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tsShowLicense_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not implemented yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tsShowPersonLicenseHistroy_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not implemented yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void visionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestsAppointments schedualTest = new frmTestsAppointments((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value, clsTestType.enTestType.Vision);
+            schedualTest.ShowDialog();
+        }
+
+        private void writtenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestsAppointments schedualTest = new frmTestsAppointments((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value, clsTestType.enTestType.Written);
+            schedualTest.ShowDialog();
+        }
+
+        private void streetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestsAppointments schedualTest = new frmTestsAppointments((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value, clsTestType.enTestType.Street);
+            schedualTest.ShowDialog();
+        }
+
     }
 }

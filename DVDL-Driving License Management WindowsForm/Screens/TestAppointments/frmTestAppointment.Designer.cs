@@ -28,56 +28,88 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvTestAppointments = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsTakeTest = new System.Windows.Forms.ToolStripMenuItem();
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotalRecords = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.ctrLocalDrivingLicenseApplicationFullDetails1 = new DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Controls.ctrLocalDrivingLicenseApplicationFullDetails();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddNewAppointment = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.ctrLocalDrivingLicenseApplicationFullDetails1 = new DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Controls.ctrLocalDrivingLicenseApplicationFullDetails();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestAppointments)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTestAppointments
             // 
             this.dgvTestAppointments.AllowUserToAddRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTestAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTestAppointments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTestAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 8F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTestAppointments.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvTestAppointments.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTestAppointments.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTestAppointments.Location = new System.Drawing.Point(20, 622);
             this.dgvTestAppointments.Name = "dgvTestAppointments";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTestAppointments.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTestAppointments.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTestAppointments.RowHeadersWidth = 51;
             this.dgvTestAppointments.RowTemplate.Height = 26;
             this.dgvTestAppointments.Size = new System.Drawing.Size(972, 214);
             this.dgvTestAppointments.TabIndex = 1;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsEdit,
+            this.tsTakeTest});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(215, 84);
+            // 
+            // tsEdit
+            // 
+            this.tsEdit.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.tsEdit.Image = global::DVDL_Driving_License_Management_WindowsForm.Properties.Resources.edit_32;
+            this.tsEdit.Name = "tsEdit";
+            this.tsEdit.Size = new System.Drawing.Size(214, 26);
+            this.tsEdit.Text = "Edit";
+            this.tsEdit.Click += new System.EventHandler(this.tsEdit_Click);
+            // 
+            // tsTakeTest
+            // 
+            this.tsTakeTest.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.tsTakeTest.Image = global::DVDL_Driving_License_Management_WindowsForm.Properties.Resources.Test_32;
+            this.tsTakeTest.Name = "tsTakeTest";
+            this.tsTakeTest.Size = new System.Drawing.Size(214, 26);
+            this.tsTakeTest.Text = "Take Test";
             // 
             // label8
             // 
@@ -120,6 +152,16 @@
             this.lblTitle.TabIndex = 79;
             this.lblTitle.Text = "Vision Test Appointments";
             // 
+            // ctrLocalDrivingLicenseApplicationFullDetails1
+            // 
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.Location = new System.Drawing.Point(14, 179);
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.Name = "ctrLocalDrivingLicenseApplicationFullDetails1";
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.Size = new System.Drawing.Size(988, 404);
+            this.ctrLocalDrivingLicenseApplicationFullDetails1.TabIndex = 0;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DVDL_Driving_License_Management_WindowsForm.Properties.Resources.Vision_512;
@@ -160,16 +202,6 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // ctrLocalDrivingLicenseApplicationFullDetails1
-            // 
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.Location = new System.Drawing.Point(14, 179);
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.Name = "ctrLocalDrivingLicenseApplicationFullDetails1";
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.Size = new System.Drawing.Size(988, 404);
-            this.ctrLocalDrivingLicenseApplicationFullDetails1.TabIndex = 0;
-            // 
             // frmTestsAppointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -192,6 +224,7 @@
             this.Text = "Vision Test Appointments";
             this.Load += new System.EventHandler(this.frmTestsAppointments_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestAppointments)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -209,5 +242,8 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnAddNewAppointment;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tsEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsTakeTest;
     }
 }

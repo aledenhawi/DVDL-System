@@ -28,7 +28,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
         
         private void frmLocalDrvingLicenseApplicationDetails_Load(object sender, EventArgs e)
         {
-           ctrLocalDrivingLicenseApplicationFullDetails1.LoadLDLApplicationDetails(_LocalDrivingLicenseApplicationID);
+           ctrLocalDrivingLicenseApplicationFullDetails1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
         }
     }
 }

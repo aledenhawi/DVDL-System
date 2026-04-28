@@ -128,10 +128,7 @@ namespace DVDL_BusinessLayer
                         _Mode = enMode.Update;
                         return true;
                     }
-                    else
-                    {
                         return false;
-                    }
                 case enMode.Update:
                     if (_Update())
                     {

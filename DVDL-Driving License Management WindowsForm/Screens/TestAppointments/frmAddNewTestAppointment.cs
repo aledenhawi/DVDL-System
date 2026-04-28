@@ -26,20 +26,25 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
         
         static int Trial =0;
 
-        bool FailedBefore = false;
+        int _TestAppointmentID = 0;
 
         float RetakeApplicationFees = 0;
 
         float TestFees = 0;
 
-        public int _LocalDrivingLicenceApplicationID { set; get; }
+        private int _LocalDrivingLicenceApplicationID = 0;
 
         clsLocalDrivingLicenseApplication _AppointmentsApplication;
+
+        clsTestAppointment _TestAppointment;
+
         public frmSchedualTest(int LocalDrivingLicenseID,clsTestType.enTestType TestType)
         {
             InitializeComponent();
             _LocalDrivingLicenceApplicationID = LocalDrivingLicenseID;
             _TestType = TestType;
+            _TestAppointment = new clsTestAppointment();
+            _Mode = enMode.AddNew;
         }
 
         public frmSchedualTest(int LocalDrivingLicenseID, clsTestType.enTestType TestType,int TestAppointmentID)
@@ -47,14 +52,22 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
             InitializeComponent();
             _LocalDrivingLicenceApplicationID = LocalDrivingLicenseID;
             _TestType = TestType;
+            _TestAppointmentID=TestAppointmentID;
+            _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
+            _Mode = enMode.Update;
         }
 
 
-
-        private void _LoadData() 
+        private void _ResetDefualValues() 
         {
-
             _AppointmentsApplication = clsLocalDrivingLicenseApplication.Find(_LocalDrivingLicenceApplicationID);
+
+            _SetPictureBoxImage();
+
+            dtpAppointmentDate.MaxDate = DateTime.Now.AddDays(30);
+            dtpAppointmentDate.MinDate = DateTime.Now;
+
+             Trial = clsLocalDrivingLicenseApplication.TotalTrialsPerTest(_LocalDrivingLicenceApplicationID, _TestType);
 
             if (_AppointmentsApplication != null)
             {
@@ -66,63 +79,86 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
                 lblTrial.Text = Trial.ToString();
                 lblRetakeTestID.Text = "N/A";
 
-                if (!FailedBefore)
+                if (clsLocalDrivingLicenseApplication.DoesAttentedTestType(_LocalDrivingLicenceApplicationID, _TestType))
                 {
                     gbRetakeExam.Enabled = false;
                     lblRetakeApplicationFees.Text = "0";
                     lblTotalFees.Text = lblFees.Text;
                 }
-                else 
+                else
                 {
                     RetakeApplicationFees = clsApplicationType.Find(8).Fees;
                     gbRetakeExam.Enabled = true;
                     lblRetakeApplicationFees.Text = "0";
                     lblTotalFees.Text = (Convert.ToSingle(lblFees.Text) + RetakeApplicationFees).ToString();
                 }
-                
             }
+            else 
+            {
+                MessageBox.Show("Error while loading the application data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
+        private void _LoadData() 
+        {
+            if (_TestAppointment.AppoitmentDate < dtpAppointmentDate.MinDate) 
+            {
+                dtpAppointmentDate.Value = dtpAppointmentDate.MinDate;
+                return;
+            }
+
+            dtpAppointmentDate.Value = _TestAppointment.AppoitmentDate;
+
+          
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (_Mode == enMode.AddNew)
-            {
-                if (FailedBefore)
-                {
-                    clsApplication RetakeApplication = new clsApplication();
-                    RetakeApplication.ApplicationTypeID = 8;
-                    RetakeApplication.ApplicantPersonID = _AppointmentsApplication.ApplicantPersonID;
-                    RetakeApplication.ApplicationDate = DateTime.Now;
-                    RetakeApplication.CreatedByUserID = clsGlobal.CurrentUser.ID;
-                    RetakeApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
-                    RetakeApplication.LastStatusDate = DateTime.Now;
-                    RetakeApplication.PaidFees = RetakeApplicationFees;
-                    RetakeApplication.Save();
-                
-                }
-                else 
-                {
-                    clsTestAppointment testAppointment = new clsTestAppointment();
-                    testAppointment.PaidFees = TestFees;
-                    testAppointment.AppoitmentDate = dtpAppointmentDate.Value;
-                    testAppointment.CreatedByUserID = clsGlobal.CurrentUser.ID;
-                    testAppointment.IsLocked = false;
-                    testAppointment.LocalDrivingLicenseApplicationID = _LocalDrivingLicenceApplicationID;
-                    testAppointment.TestTypeID = (int)_TestType;
+             
+             // if he is here and he didn't pass the exam then he has faild before 
+             if (clsLocalDrivingLicenseApplication.DoesAttentedTestType(_LocalDrivingLicenceApplicationID,_TestType))
+             {
+                 clsApplication RetakeApplication = new clsApplication();
+                 RetakeApplication.ApplicationTypeID = 8;
+                 RetakeApplication.ApplicantPersonID = _AppointmentsApplication.ApplicantPersonID;
+                 RetakeApplication.ApplicationDate = DateTime.Now;
+                 RetakeApplication.CreatedByUserID = clsGlobal.CurrentUser.ID;
+                 RetakeApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
+                 RetakeApplication.LastStatusDate = DateTime.Now;
+                 RetakeApplication.PaidFees = RetakeApplicationFees;
 
-                    if (testAppointment.Save()) 
-                    {
-                        _Mode = enMode.Update;
-                        MessageBox.Show("Appointment saved successfully .", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else 
-                    {
-                        MessageBox.Show("Appointment Did not save successfully .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        
-                    }
+                 if (RetakeApplication.Save()) 
+                 {
+                     MessageBox.Show("Appointment saved successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 }
+                 else 
+                 {
+                     MessageBox.Show("Appointment did not save successfully .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 }
 
-                }
-            }
+             }
+             else 
+             {
+                 _TestAppointment.PaidFees = TestFees;
+                 _TestAppointment.AppoitmentDate = dtpAppointmentDate.Value;
+                 _TestAppointment.CreatedByUserID = clsGlobal.CurrentUser.ID;
+                 _TestAppointment.IsLocked = false;
+                 _TestAppointment.LocalDrivingLicenseApplicationID = _LocalDrivingLicenceApplicationID;
+                 _TestAppointment.TestTypeID = (int)_TestType;
+
+                 if (_TestAppointment.Save()) 
+                 {
+                     _Mode = enMode.Update;
+                     MessageBox.Show("Appointment saved successfully .", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 }
+                 else 
+                 {
+                     MessageBox.Show("Appointment did not save successfully .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     
+                 }
+
+             }
             
         }
 
@@ -152,10 +188,10 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
 
         private void frmAddNewTestAppointment_Load(object sender, EventArgs e)
         {
-            FailedBefore = clsLocalDrivingLicenseApplication.DoesPassedTestType(_LocalDrivingLicenceApplicationID,_TestType);
-            groupBox1.Text = _TestType.ToString() + " Test";
-            _SetPictureBoxImage();
-            _LoadData();
+            _ResetDefualValues();
+
+            if (_Mode == enMode.Update)
+                _LoadData();
         }
     }
 }

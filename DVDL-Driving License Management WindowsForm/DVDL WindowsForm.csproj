@@ -458,6 +458,15 @@
     <None Include="Resources\driving-test 512.png" />
     <None Include="Resources\Count 32.png" />
     <None Include="Resources\PersonDetails 32.png" />
+    <None Include="Resources\edit 32.png" />
+    <None Include="Resources\Schedule Test 32.png" />
+    <None Include="Resources\IssueDrivingLicense 32.png" />
+    <None Include="Resources\License View 321.png" />
+    <None Include="Resources\PersonLicenseHistory 32.png" />
+    <None Include="Resources\Vision Test 32.png" />
+    <None Include="Resources\Written Test 32 Sechdule.png" />
+    <None Include="Resources\Street Test 32.png" />
+    <None Include="Resources\Test 32.png" />
     <Content Include="Screens\Login\LogFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

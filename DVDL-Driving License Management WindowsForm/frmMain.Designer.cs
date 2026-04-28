@@ -207,7 +207,7 @@
             this.tsDrivingLicensesServices.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsDrivingLicensesServices.Name = "tsDrivingLicensesServices";
             this.tsDrivingLicensesServices.Size = new System.Drawing.Size(338, 54);
-            this.tsDrivingLicensesServices.Text = "Manage Application Types";
+            this.tsDrivingLicensesServices.Text = "Manage Applications";
             // 
             // toolStripMenuItem9
             // 

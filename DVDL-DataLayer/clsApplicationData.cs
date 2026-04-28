@@ -272,8 +272,8 @@ namespace DVDL_DataLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = @"select ActiveApplicationID = ApplicationID from Applications
-                             where ApplicationID = @ApplicationID And ApplicationTypeID = @ApplicationTypeID And ApplicationStatus = 1;";
+            string Query = @"select ApplicationID from Applications
+                             where ApplicantPersonID = @ApplicantPersonID And ApplicationTypeID = @ApplicationTypeID And ApplicationStatus = 1;";
 
 
             SqlCommand command = new SqlCommand(Query, Connection);
@@ -281,7 +281,7 @@ namespace DVDL_DataLayer
             // add with value for insert
 
             command.Parameters.Add("@ApplicationTypeID", SqlDbType.Int).Value = ApplicationTypeID;
-            command.Parameters.Add("@ApplicationID", SqlDbType.Int).Value = ActiveApplicationID;
+            command.Parameters.Add("@ApplicantPersonID", SqlDbType.Int).Value = ApplicantPersonID;
 
             try
             {
@@ -311,7 +311,7 @@ namespace DVDL_DataLayer
             int ActiveApplicationID = -1;
 
 
-            string Query = @"SELECT COUNT(*) FROM LocalDrivingLicenseApplications
+            string Query = @"SELECT LocalDrivingLicenseApplications.ApplicationID FROM LocalDrivingLicenseApplications
                              INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
                              WHERE ApplicantPersonID = @PersonID AND
                              ApplicationTypeID = @ApplicationTypeID AND

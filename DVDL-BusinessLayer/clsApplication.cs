@@ -13,7 +13,7 @@ namespace DVDL_BusinessLayer
 
         protected enMode Mode;
 
-        public enum enApplicationType {NewDrivingLicense = 1 , RenewDrivingLicnes = 2 , ReplacementforLostDrivingLicense = 3 ,
+        public enum enApplicationType {NewLocalDrivingLicense = 1 , RenewDrivingLicnes = 2 , ReplacementforLostDrivingLicense = 3 ,
             ReplacementforDamagedDrivingLicense = 4, ReleaseDetainedDrivingLicsense = 5, NewInternationalLicense = 6,RetakeTest = 8}
 
         public enum enApplicationStatus { New = 1, Cancelled = 2, Completed = 3 }
@@ -102,8 +102,12 @@ namespace DVDL_BusinessLayer
         {
             if (Mode == enMode.AddNew)
             {
-                Mode = enMode.Update;
-                return _AddNewApplication();
+                if (_AddNewApplication())
+                {
+                    Mode = enMode.Update;
+                    return true;
+                }
+                return false;
             }
             else if (Mode == enMode.Update)
             {

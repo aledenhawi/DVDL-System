@@ -19,7 +19,7 @@ namespace DVDL_Driving_License_Management_WindowsForm
 
         private void frmTEst_Load(object sender, EventArgs e)
         {
-            ctrLocalDrivingLicenseApplicationFullDetails1.LoadLDLApplicationDetails(30);
+            ctrLocalDrivingLicenseApplicationFullDetails1.LoadApplicationInfoByLocalDrivingAppID(30);
         }
     }
 }
