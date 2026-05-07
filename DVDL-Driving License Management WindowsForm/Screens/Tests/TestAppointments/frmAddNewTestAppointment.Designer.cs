@@ -1,6 +1,6 @@
 ﻿namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
 {
-    partial class frmSchedualTest
+    partial class frmScheduleTest
     {
         /// <summary>
         /// Required designer variable.

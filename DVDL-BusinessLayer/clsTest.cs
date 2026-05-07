@@ -33,13 +33,7 @@ namespace DVDL_BusinessLayer
             }
         }
 
-        public clsTestAppointment TestAppointment
-        {
-            get
-            {
-                return clsTestAppointment.Find(this.TestAppointmentID);
-            }
-        }
+        public clsTestAppointment TestAppointment;
 
         public clsTest()
         {
@@ -59,12 +53,12 @@ namespace DVDL_BusinessLayer
             this.TestResult = TestResult;
             this.Notes = Notes;
             this.CreatedByUserID = CreatedByUserID;
+            this.TestAppointment = clsTestAppointment.Find(TestAppointmentID);
         }
 
         bool _AddNewTest()
         {
             this.TestID = clsTestData.AddNewTest(this.TestAppointmentID, this.TestResult, this.Notes, this.CreatedByUserID);
-
             return TestID != -1;
         }
 
@@ -116,5 +110,26 @@ namespace DVDL_BusinessLayer
         {
             return clsTestData.IsTestExists(TestID);
         }
+
+        public static clsTest FindLastTestPerPersonIDAndLicenseClassID(int PersonID, int LicenseClassID, clsTestType.enTestType TestTypeID)
+        {
+            int TestID = -1;
+            bool TestResult = false;
+            int TestAppointmentID = -1;
+            string Notes = null;
+            int CreatedByUserID = -1;
+
+            if (clsTestData.GetLastTestByPersonIDAndTestTypeAndLicenseClass(PersonID, LicenseClassID, (int)TestTypeID, ref TestID, ref TestAppointmentID, ref TestResult, ref Notes, ref CreatedByUserID))
+                return new clsTest(TestID, TestAppointmentID, TestResult, Notes, CreatedByUserID);
+            else
+                return null;
+        }
+
+        public static bool PassedAllTests(int LocalDrvingLicenseApplicatoinID) 
+        {
+            return (clsTestData.GetPassedTestCount(LocalDrvingLicenseApplicatoinID) == 3);
+        }
+
     }
+
 }

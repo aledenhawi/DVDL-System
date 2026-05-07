@@ -12,14 +12,14 @@ namespace DVDL_DataLayer
     public class clsTestAppointmentData
     {
 
-        public static int AddNewTestAppointment(int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, float PaidFees, int CreatedByUserID, bool IsLocked)
+        public static int AddNewTestAppointment(int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, float PaidFees, int CreatedByUserID, bool IsLocked,int RetakeTestApplicationID)
         {
             int TestAppointmentID = -1;
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = @"INSERT INTO TestAppointments (TestTypeID,LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,CreatedByUserID,IsLocked)
-                values(@TestTypeID,@LocalDrivingLicenseApplicationID,@AppointmentDate,@PaidFees,@CreatedByUserID,@IsLocked)
+            string Query = @"INSERT INTO TestAppointments (TestTypeID,LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,CreatedByUserID,IsLocked,RetakeTestApplicationID)
+                values(@TestTypeID,@LocalDrivingLicenseApplicationID,@AppointmentDate,@PaidFees,@CreatedByUserID,@IsLocked,@RetakeTestApplicationID)
                 SELECT SCOPE_IDENTITY();";
 
 
@@ -33,6 +33,13 @@ namespace DVDL_DataLayer
             command.Parameters.Add("@PaidFees", SqlDbType.SmallMoney).Value = PaidFees;
             command.Parameters.Add("@CreatedByUserID", SqlDbType.Int).Value = CreatedByUserID;
             command.Parameters.Add("@IsLocked", SqlDbType.Bit).Value = IsLocked;
+            if (RetakeTestApplicationID == -1)
+                command.Parameters.Add("@RetakeTestApplicationID", SqlDbType.Int).Value = DBNull.Value;
+            else
+                command.Parameters.Add("@RetakeTestApplicationID", SqlDbType.Int).Value = RetakeTestApplicationID;
+
+
+
 
 
             try
@@ -143,7 +150,7 @@ namespace DVDL_DataLayer
             return isFound;
         }
 
-        public static bool UpdateTestAppointment(int ID, int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, float PaidFees, int CreatedByUserID, bool IsLocked)
+        public static bool UpdateTestAppointment(int ID, int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, float PaidFees, int CreatedByUserID, bool IsLocked,int RetakeTestApplicationID)
         {
             int RowsAffected = 0;
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -154,7 +161,8 @@ namespace DVDL_DataLayer
                                  AppointmentDate = @AppointmentDate,
                                  PaidFees = @PaidFees,
                                  CreatedByUserID = @CreatedByUserID,
-                                 IsLocked = @IsLocked
+                                 IsLocked = @IsLocked,
+                                 RetakeTestApplicationID = @RetakeTestApplicationID
                              Where TestAppointmentID = @ID;";
 
             SqlCommand command = new SqlCommand(Query, Connection);
@@ -169,6 +177,13 @@ namespace DVDL_DataLayer
             command.Parameters.Add("@PaidFees", SqlDbType.SmallMoney).Value = PaidFees;
             command.Parameters.Add("@CreatedByUserID", SqlDbType.Int).Value = CreatedByUserID;
             command.Parameters.Add("@IsLocked", SqlDbType.Bit).Value = IsLocked;
+
+            // Handle Null Nalue
+            if (RetakeTestApplicationID == -1)
+                command.Parameters.Add("@RetakeTestApplicationID", SqlDbType.Int).Value = DBNull.Value;
+            else
+                command.Parameters.Add("@RetakeTestApplicationID", SqlDbType.Int).Value = RetakeTestApplicationID;
+
 
 
             try

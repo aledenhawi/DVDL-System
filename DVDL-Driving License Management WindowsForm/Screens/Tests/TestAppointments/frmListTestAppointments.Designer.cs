@@ -94,14 +94,15 @@
             this.tsEdit,
             this.tsTakeTest});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(142, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(215, 84);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // tsEdit
             // 
             this.tsEdit.BackColor = System.Drawing.Color.DarkSlateGray;
             this.tsEdit.Image = global::DVDL_Driving_License_Management_WindowsForm.Properties.Resources.edit_32;
             this.tsEdit.Name = "tsEdit";
-            this.tsEdit.Size = new System.Drawing.Size(141, 26);
+            this.tsEdit.Size = new System.Drawing.Size(214, 26);
             this.tsEdit.Text = "Edit";
             this.tsEdit.Click += new System.EventHandler(this.tsEdit_Click);
             // 
@@ -110,8 +111,9 @@
             this.tsTakeTest.BackColor = System.Drawing.Color.DarkSlateGray;
             this.tsTakeTest.Image = global::DVDL_Driving_License_Management_WindowsForm.Properties.Resources.Test_32;
             this.tsTakeTest.Name = "tsTakeTest";
-            this.tsTakeTest.Size = new System.Drawing.Size(141, 26);
+            this.tsTakeTest.Size = new System.Drawing.Size(214, 26);
             this.tsTakeTest.Text = "Take Test";
+            this.tsTakeTest.Click += new System.EventHandler(this.tsTakeTest_Click);
             // 
             // label8
             // 

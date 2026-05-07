@@ -71,9 +71,9 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
             if (LocalDrivingLicenseDataTable == null) return;
 
 
-            txbFiltringLDLApplications.Enabled = (cmbLDLApplicationsFiltring.Text == "None") ? false : true;
+            txbFiltringLDLApplications.Visible = (cmbLDLApplicationsFiltring.Text == "None") ? false : true;
 
-            if (txbFiltringLDLApplications.Enabled)
+            if (txbFiltringLDLApplications.Visible)
             {
                 txbFiltringLDLApplications.Text = string.Empty;
                 txbFiltringLDLApplications.Focus();
@@ -189,7 +189,14 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
 
         private void tsEditApplicatoin_Click(object sender, EventArgs e)
         {
-            frmAddEditLocalDrivingLicenseApplication frmAddEditLocalDrivingLicenseApplication = new frmAddEditLocalDrivingLicenseApplication((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value);
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value;
+
+            if (clsLocalDrivingLicenseApplication.GetPassedTestCount(LocalDrivingLicenseApplicationID) > 0) 
+            {
+                MessageBox.Show("You can't edit an application with passed tests","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+            frmAddEditLocalDrivingLicenseApplication frmAddEditLocalDrivingLicenseApplication = new frmAddEditLocalDrivingLicenseApplication();
             frmAddEditLocalDrivingLicenseApplication.ShowDialog();
             frmLocalDrivingLicenseApplications_Load(null, null);
         }
@@ -201,7 +208,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
 
             clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find(LocalDrivingLicenseApplicationID);
 
-            int totalPassedTests = localDrivingLicenseApplication.PassedTest;
+            byte totalPassedTests = localDrivingLicenseApplication.GetPassedTestCount();
 
 
             // check it later
@@ -246,18 +253,21 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
         {
             frmTestsAppointments schedualTest = new frmTestsAppointments((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value, clsTestType.enTestType.Vision);
             schedualTest.ShowDialog();
+            frmLocalDrivingLicenseApplications_Load(null, null);
         }
 
         private void writtenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTestsAppointments schedualTest = new frmTestsAppointments((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value, clsTestType.enTestType.Written);
             schedualTest.ShowDialog();
+            frmLocalDrivingLicenseApplications_Load(null, null);
         }
 
         private void streetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTestsAppointments schedualTest = new frmTestsAppointments((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value, clsTestType.enTestType.Street);
             schedualTest.ShowDialog();
+            frmLocalDrivingLicenseApplications_Load(null, null);
         }
 
     }

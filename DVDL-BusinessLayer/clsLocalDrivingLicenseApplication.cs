@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,6 @@ namespace DVDL_BusinessLayer
     {
         enum enMode { AddNew = 1, Update = 2 }
         enMode _Mode;
-
-        // Check it Later
-        public int PassedTest { get; set; }
 
         public int LocalDrivingLicenseApplicationID { get; set; }
 
@@ -30,7 +28,6 @@ namespace DVDL_BusinessLayer
             ApplicationID = -1;
             LicenseClassID = -1;
             _Mode = enMode.AddNew;
-            PassedTest = 0;
         }
 
         private clsLocalDrivingLicenseApplication(int applicationID, int applicantPersonID, DateTime applicationDate, int applicationTypeID, int createdByUserID, DateTime lastStatusDate,
@@ -40,8 +37,6 @@ namespace DVDL_BusinessLayer
             LicenseClassID = _LicenseClassID;
             LicenseClassInfo = clsLicenseClasses.Find(LicenseClassID);
             _Mode = enMode.Update;
-            // Check it Later
-            PassedTest = clsLocalDrivingLicenseApplicationData.GetPassedTest(_LocalDrivingLicenseApplicationsID);
         }
 
         private bool _AddNew()
@@ -145,10 +140,39 @@ namespace DVDL_BusinessLayer
 
         }
 
+        public clsTest GetLastTestPerTestType(clsTestType.enTestType TestTypeID) 
+        {
+            return clsTest.FindLastTestPerPersonIDAndLicenseClassID(this.ApplicantPersonID, this.LicenseClassID, TestTypeID);
+        }
+
         public bool DoesPassedPreviousTestType(clsTestType.enTestType CurrentTestTypeID)
         {
-            int TestTypeID = ((int)CurrentTestTypeID - 1) > 0 ? (int)CurrentTestTypeID - 1 : 1;
-            return clsLocalDrivingLicenseApplicationData.DoesPassTestType(LocalDrivingLicenseApplicationID, TestTypeID);
+            if (CurrentTestTypeID == clsTestType.enTestType.Vision)
+                return true;
+
+            CurrentTestTypeID = CurrentTestTypeID - 1 ;
+
+            return clsLocalDrivingLicenseApplicationData.DoesPassTestType(LocalDrivingLicenseApplicationID,(int)CurrentTestTypeID);
+        }
+
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationsID)
+        {
+            return clsTestData.GetPassedTestCount(LocalDrivingLicenseApplicationsID);
+        }
+
+        public byte GetPassedTestCount()
+        {
+            return clsTestData.GetPassedTestCount(this.LocalDrivingLicenseApplicationID);
+        }
+
+        public static bool PassedAllTests(int LocalDrivingLicenseApplicationID)
+        {
+            return clsTest.PassedAllTests(LocalDrivingLicenseApplicationID);
+        }
+
+        public bool PassedAllTests()
+        {
+            return clsTest.PassedAllTests(this.LocalDrivingLicenseApplicationID);
         }
 
         public static bool DoesPassedTestType(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestTypeID)

@@ -1,6 +1,7 @@
 ﻿using DVDL_BusinessLayer;
 using DVDL_Driving_License_Management_WindowsForm.Properties;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Controls;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Tests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -115,16 +116,57 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
                 return;
             }
 
-            frmSchedualTest addNewTestAppointment = new frmSchedualTest(_LocalDrivingLicenseApplicationID, _TestType);
-            addNewTestAppointment.ShowDialog();
-            _FullDataGridView();
+            //---
+            clsTest LastTest = localDrivingLicenseApplication.GetLastTestPerTestType(_TestType);
+
+            if (LastTest == null)
+            {
+                frmScheduleTest frm1 = new frmScheduleTest(_LocalDrivingLicenseApplicationID, _TestType);
+                frm1.ShowDialog();
+                frmTestsAppointments_Load(null, null);
+                return;
+            }
+
+            //if person already passed the test s/he cannot retak it.
+            if (LastTest.TestResult == true)
+            {
+                MessageBox.Show("This person already passed this test before, you can only retake faild test", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmScheduleTest frm2 = new frmScheduleTest
+                (LastTest.TestAppointment.LocalDrivingLicenseApplicationID, _TestType);
+            frm2.ShowDialog();
+            frmTestsAppointments_Load(null, null);
+            //---
         }
 
         private void tsEdit_Click(object sender, EventArgs e)
         {
-            frmSchedualTest schedualTest = new frmSchedualTest(_LocalDrivingLicenseApplicationID, _TestType, (int) dgvTestAppointments.CurrentRow.Cells["TestAppointmentID"].Value);
+            frmScheduleTest schedualTest = new frmScheduleTest(_LocalDrivingLicenseApplicationID, _TestType, (int) dgvTestAppointments.CurrentRow.Cells["TestAppointmentID"].Value);
             schedualTest.ShowDialog();
             _FullDataGridView();
+        }
+
+        private void tsTakeTest_Click(object sender, EventArgs e)
+        {
+            if(!clsLocalDrivingLicenseApplication.DoesPassedTestType(_LocalDrivingLicenseApplicationID, _TestType))
+            {
+
+                frmTakeTest takeTest = new frmTakeTest(_TestType, (int)dgvTestAppointments.CurrentRow.Cells["TestAppointmentID"].Value);
+                takeTest.ShowDialog();
+                _FullDataGridView();
+            }
+            else
+            {
+                MessageBox.Show("Person already passed this test, You cannot retake the test", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (dgvTestAppointments.CurrentRow.Cells["IsLocked"] != null)
+                tsTakeTest.Enabled = !(Convert.ToBoolean(dgvTestAppointments.CurrentRow.Cells["IsLocked"].Value));
         }
     }
 }

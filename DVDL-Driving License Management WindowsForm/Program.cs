@@ -4,6 +4,7 @@ using DVDL_Driving_License_Management_WindowsForm.Screens.Applications;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Basic;
 using DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens;
 using DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Tests;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Users;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ namespace DVDL_Driving_License_Management_WindowsForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new frmTEst());
             Application.Run(new frmLogin());
         }
     }

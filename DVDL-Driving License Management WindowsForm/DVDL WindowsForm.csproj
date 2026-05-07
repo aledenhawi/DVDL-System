@@ -118,6 +118,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Tests\frmTakeTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Tests\frmTakeTest.Designer.cs">
+      <DependentUpon>frmTakeTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Tests\TestAppointments\frmAddNewTestAppointment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,10 +136,16 @@
     <Compile Include="Screens\Tests\TestAppointments\frmListTestAppointments.Designer.cs">
       <DependentUpon>frmListTestAppointments.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Tests\TestAppointments\UserControls\ctrScheduleTest.cs">
+    <Compile Include="Screens\Tests\UserControls\ctrScheduledTest.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Screens\Tests\TestAppointments\UserControls\ctrScheduleTest.Designer.cs">
+    <Compile Include="Screens\Tests\UserControls\ctrScheduledTest.Designer.cs">
+      <DependentUpon>ctrScheduledTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tests\UserControls\ctrScheduleTest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Screens\Tests\UserControls\ctrScheduleTest.Designer.cs">
       <DependentUpon>ctrScheduleTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\Tests\TestTypes\frmTestTypesManagment.cs">
@@ -268,13 +280,19 @@
     <EmbeddedResource Include="Screens\People\Controls\ctrPersonDetailsWithFilter.resx">
       <DependentUpon>ctrPersonDetailsWithFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Tests\frmTakeTest.resx">
+      <DependentUpon>frmTakeTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Screens\Tests\TestAppointments\frmAddNewTestAppointment.resx">
       <DependentUpon>frmAddNewTestAppointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Tests\TestAppointments\frmListTestAppointments.resx">
       <DependentUpon>frmListTestAppointments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\Tests\TestAppointments\UserControls\ctrScheduleTest.resx">
+    <EmbeddedResource Include="Screens\Tests\UserControls\ctrScheduledTest.resx">
+      <DependentUpon>ctrScheduledTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Tests\UserControls\ctrScheduleTest.resx">
       <DependentUpon>ctrScheduleTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Tests\TestTypes\frmTestTypesManagment.resx">

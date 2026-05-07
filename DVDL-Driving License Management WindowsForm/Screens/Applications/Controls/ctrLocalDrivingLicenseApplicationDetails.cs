@@ -25,7 +25,6 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Contr
 
         public int LocalDrivinglicenseAppID { get { return _LocalDrivinglicenseAppID; } }
 
-
         public ctrLocalDrivingLicenseApplicationFullDetails()
         {
             InitializeComponent();
@@ -59,7 +58,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Contr
             linkLabel1.Enabled = ( _LicenseID !=-1);
 
              lblDLApplicationID.Text = _LocalDrivingLicenseApplicationInfo.LocalDrivingLicenseApplicationID.ToString();
-             lblPassedTest.Text = "3/" + _LocalDrivingLicenseApplicationInfo.PassedTest.ToString();
+             lblPassedTest.Text = "3/" + _LocalDrivingLicenseApplicationInfo.GetPassedTestCount().ToString();
              lblAppliedForLicense.Text = _LocalDrivingLicenseApplicationInfo.LicenseClassInfo.Name;
              lblID.Text = _LocalDrivingLicenseApplicationInfo.ApplicationID.ToString();
              lblApplicant.Text = _LocalDrivingLicenseApplicationInfo.PersonInfo.GetFullName();
@@ -95,5 +94,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Contr
             frmPersonDetails frm = new frmPersonDetails(_LocalDrivingLicenseApplicationInfo.ApplicantPersonID);
             frm.ShowDialog();
         }
+
+       
     }
 }

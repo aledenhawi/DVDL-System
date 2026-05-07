@@ -96,7 +96,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
             lblCreatedByUser.Text = _LocalDrivingLicenseApplication.CreatedByUserInfo.Username;
             lblApplicationDate.Text = _LocalDrivingLicenseApplication.ApplicationDate.ToShortDateString();
             lblApplicationFees.Text = _LocalDrivingLicenseApplication.ApplicationTypeInfo.Fees.ToString();
-            lblApplicationID.Text = _LocalDrivingLicenseApplication.ApplicationID.ToString();
+            lblApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
             cmbLicenseClasses.SelectedIndex = cmbLicenseClasses.FindString(_LocalDrivingLicenseApplication.LicenseClassInfo.Name);
 
         }

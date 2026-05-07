@@ -82,7 +82,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments.U
 
             if(_CreationMode == enCreationMode.RetakeTestSchedule)
             {
-                lblRetakeApplicationFees.Text = clsTestType.Find(TestTypeID).Fees.ToString();
+                lblRetakeApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees.ToString();
                 gbRetakeTest.Enabled = true;
                 lblRetakeTestID.Text = "0";
                 lblTitle.Text = "Schedule Retake Test";
@@ -106,6 +106,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments.U
             lblTrial.Text = _LocalDrivingLicenseApplication.TotalTrialsPerTest(TestTypeID).ToString();
             dtpAppointmentDate.MinDate = DateTime.Now;
 
+
             if (_Mode == enMode.AddNew)
             {
                 lblFees.Text = clsTestType.Find(TestTypeID).Fees.ToString();
@@ -117,10 +118,12 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments.U
                     return;
             }
 
+            lblTotalFees.Text = (Convert.ToSingle(lblFees.Text) + Convert.ToSingle(lblRetakeApplicationFees.Text)).ToString();
+
             if (!_HandleActiveTestAppointmentConstraint())
                 return;
             if (!_HadleLockedTestAppointmentConstraint())
-                return;
+                return; 
             if (!_HandlePreviousTestConstraint())
                 return;
         }
@@ -128,7 +131,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments.U
         private bool _LoadTestAppointmentData() 
         {
             _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
-
+            _TestAppointment.RetakeTestApplicationID = _TestAppointment.RetakeTestApplicationID;
             if (_TestAppointment == null)
             {
                 MessageBox.Show("Error: Test Appointment not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -188,7 +191,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments.U
             if (!_LocalDrivingLicenseApplication.DoesPassedPreviousTestType(TestTypeID))
             {
                 lblUserMessage.Visible = true;
-                lblUserMessage.Text = "Person has not passed the previous test !!";
+                lblUserMessage.Text = "Person did not passed the previous test !!";
                 btnSave.Enabled = false;
                 dtpAppointmentDate.Enabled = false;
                 return false;

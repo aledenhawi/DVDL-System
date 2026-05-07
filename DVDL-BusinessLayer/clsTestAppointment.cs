@@ -75,13 +75,13 @@ namespace DVDL_BusinessLayer
 
         private bool _AddNew()
         {
-            this.TestAppointmentID = clsTestAppointmentData.AddNewTestAppointment(Convert.ToInt32(this.TestTypeID), LocalDrivingLicenseApplicationID, AppoitmentDate, PaidFees, CreatedByUserID, IsLocked);
+            this.TestAppointmentID = clsTestAppointmentData.AddNewTestAppointment(Convert.ToInt32(this.TestTypeID), LocalDrivingLicenseApplicationID, AppoitmentDate, PaidFees, CreatedByUserID, IsLocked, RetakeTestApplicationID);
             return this.TestAppointmentID != -1;
         }
 
         private bool _Update()
         {
-            return clsTestAppointmentData.UpdateTestAppointment(this.TestAppointmentID, Convert.ToInt32(this.TestTypeID), this.LocalDrivingLicenseApplicationID, this.AppoitmentDate, this.PaidFees, this.CreatedByUserID, this.IsLocked);
+            return clsTestAppointmentData.UpdateTestAppointment(this.TestAppointmentID, Convert.ToInt32(this.TestTypeID), this.LocalDrivingLicenseApplicationID, this.AppoitmentDate, this.PaidFees, this.CreatedByUserID, this.IsLocked,this.RetakeTestApplicationID);
         }
 
         public bool Save()

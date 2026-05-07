@@ -18,6 +18,10 @@ namespace DVDL_DataLayer
 
             string Query = @"INSERT INTO Tests (TestAppointmentID ,TestResult , Notes , CreatedByUserID)
                 values(@TestAppointmentID, @TestResult, @Notes, @CreatedByUserID)
+                
+                UPDATE  TestAppointments
+                set IsLocked = 1
+                Where TestAppointmentID = @TestAppointmentID;
                 SELECT SCOPE_IDENTITY();";
 
 
@@ -58,6 +62,59 @@ namespace DVDL_DataLayer
             return TestID;
         }
 
+        public static bool GetLastTestByPersonIDAndTestTypeAndLicenseClass(int PersonID,int LicenseClassID,int TestTypeID,ref int TestID,
+            ref int TestAppointmentID,ref bool TestResult,ref string Notes,ref int CreatedByUserID)
+        {
+            bool IsFound = false;
+            SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query = @"SELECT TOP 1 Tests.TestAppointmentID, Tests.TestID, Tests.TestResult, Tests.Notes , Tests.CreatedByUserID 
+                             from LocalDrivingLicenseApplications
+                             inner join 
+                             TestAppointments on LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID
+                             inner join Tests on TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+                             inner join Applications on LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                             where Applications.ApplicantPersonID = @PersonID And
+                             TestAppointments.TestTypeID = @TestTypeID And 
+                             LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID
+                             ORDER BY Tests.TestID DESC";
+
+
+            SqlCommand command = new SqlCommand(Query, Connection);
+
+            // add for insert
+            command.Parameters.Add("@PersonID", SqlDbType.Int).Value = PersonID;
+            command.Parameters.Add("@TestTypeID", SqlDbType.Int).Value = TestTypeID;
+            command.Parameters.Add("@LicenseClassID", SqlDbType.Int).Value = LicenseClassID;
+
+            try
+            {
+                Connection.Open();
+                
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    TestID = Convert.ToInt32(reader["TestID"]);
+                    TestResult = Convert.ToBoolean(reader["TestResult"]);
+                    Notes = (reader["Notes"] != DBNull.Value) ? reader["Notes"].ToString() : null;
+                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                    TestAppointmentID = Convert.ToInt32(reader["TestAppointmentID"]);
+                    IsFound = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return IsFound;
+        }
 
         public static bool UpdateTest(int TestID ,int TestAppointmentID, bool TestResult, string Notes, int CreatedByUserID)
         {
@@ -106,7 +163,6 @@ namespace DVDL_DataLayer
             return (RowsAffected > 0);
         }
 
-    
         public static bool GetTestInfoByID(int TestID, ref int TestAppointmentID, ref bool TestResult, ref string Notes, ref int CreatedByUserID)
         {
             bool isFound = false;
@@ -127,12 +183,10 @@ namespace DVDL_DataLayer
 
                 if (Reader.Read())
                 {
-                    Notes = Reader["Notes"].ToString();
+                    Notes = (Reader["Notes"] != DBNull.Value) ? Reader["Notes"].ToString() : null;
                     CreatedByUserID = Convert.ToInt32(Reader["CreatedByUserID"]);
                     TestAppointmentID = Convert.ToInt32(Reader["TestAppointmentID"]);
                     TestResult = Convert.ToBoolean(Reader["TestResult"]);
-
-
                     isFound = true;
                 }
 
@@ -149,6 +203,46 @@ namespace DVDL_DataLayer
             return isFound;
         }
 
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationsID)
+        {
+            byte PassedTests = 0;
+
+            SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query = @"Select Count(TestID) from LocalDrivingLicenseApplications
+                             INNER JOIN TestAppointments
+                             ON LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID
+                             INNER JOIN Tests
+                             ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                             where TestResult = 1 AND LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationsID";
+
+
+            SqlCommand command = new SqlCommand(Query, Connection);
+
+            // add with value for insert
+
+            command.Parameters.Add("@LocalDrivingLicenseApplicationsID", SqlDbType.Int).Value = LocalDrivingLicenseApplicationsID;
+
+            try
+            {
+                Connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                PassedTests = Convert.ToByte(result);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return PassedTests;
+        }
 
         public static bool DeleteTest(int ID)
         {
@@ -234,3 +328,4 @@ namespace DVDL_DataLayer
 
     }
 }
+

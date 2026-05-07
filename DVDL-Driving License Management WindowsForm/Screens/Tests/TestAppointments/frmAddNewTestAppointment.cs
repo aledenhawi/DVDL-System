@@ -16,14 +16,14 @@ using static DVDL_BusinessLayer.clsTestType;
 
 namespace DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments
 {
-    public partial class frmSchedualTest : Form
+    public partial class frmScheduleTest : Form
     {
         private clsTestType.enTestType _TestType;
 
         private int _LocalDrivingLicenceApplicationID = 0;
 
         private int _AppointmentID = -1;
-        public frmSchedualTest(int LocalDrivingLicenseID, clsTestType.enTestType TestType, int AppointmentID = -1)
+        public frmScheduleTest(int LocalDrivingLicenseID, clsTestType.enTestType TestType, int AppointmentID = -1)
         {
             InitializeComponent();
             _AppointmentID = AppointmentID;

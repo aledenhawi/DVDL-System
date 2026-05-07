@@ -216,45 +216,6 @@ namespace DVDL_DataLayer
             return LocalDrivingLicenseApplicationsTable;
         }
 
-        public static int GetPassedTest(int LocalDrivingLicenseApplicationsID)
-        {
-            int PassedTests = 0;
-
-            SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string Query = @"Select Count(TestID) from Tests
-                             INNER JOIN TestAppointments
-                             ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
-                             where TestResult = 1 AND LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationsID";
-
-
-            SqlCommand command = new SqlCommand(Query, Connection);
-
-            // add with value for insert
-
-            command.Parameters.Add("@LocalDrivingLicenseApplicationsID", SqlDbType.Int).Value = LocalDrivingLicenseApplicationsID;
-
-            try
-            {
-                Connection.Open();
-
-                object result = command.ExecuteScalar();
-
-                PassedTests = Convert.ToInt32(result);
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-            finally
-            {
-                Connection.Close();
-            }
-
-            return PassedTests;
-        }
-
         public static bool IsLocalDrivingLicenseApplicationExists(int ID)
         {
             string Query = "SELECT Count(LocalDrivingLicenseApplicationID) FROM LocalDrivingLicenseApplication WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
@@ -291,7 +252,7 @@ namespace DVDL_DataLayer
                                ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
                              WHERE LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
                                AND TestTypeID = @TestTypeID
-                             ORDER BY TestAppointments.TestAppointmentID DESC;";
+                             ORDER BY Tests.TestID DESC;";
 
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {

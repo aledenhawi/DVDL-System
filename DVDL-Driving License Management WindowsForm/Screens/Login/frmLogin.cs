@@ -87,7 +87,15 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Basic
 
             frmMain mainForm = new frmMain();
 
-            mainForm.ShowDialog();
+            try
+            {
+                mainForm.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("You Have to leave the app", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
 
             if (!mainForm.IsSignOut)
             {
