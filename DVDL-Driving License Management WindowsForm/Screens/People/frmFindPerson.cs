@@ -21,10 +21,9 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.PeopleScreens
 
         public event DataBackHandler DataBack;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Close_Click(object sender, EventArgs e)
         {
-            DataBack?.Invoke(this, ctrPersonDetailsWithFilter1.PersonID);
-            this.Close();
+            Close();
         }
     }
 }

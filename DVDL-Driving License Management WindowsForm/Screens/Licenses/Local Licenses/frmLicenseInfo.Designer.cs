@@ -96,7 +96,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "frmLicenseInfo";
-            this.Text = "frmLicenseInfo";
+            this.Text = "License Info";
             this.Load += new System.EventHandler(this.frmLicenseInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonPic)).EndInit();
             this.ResumeLayout(false);

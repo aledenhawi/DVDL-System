@@ -121,7 +121,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmIssueDrivingLicenseForTheFirstTime";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmIssueDrivingLicenseForTheFirstTime";
+            this.Text = "Issue Driving License For The First Time";
             this.Load += new System.EventHandler(this.frmIssueDrivingLicenseForTheFirstTime_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

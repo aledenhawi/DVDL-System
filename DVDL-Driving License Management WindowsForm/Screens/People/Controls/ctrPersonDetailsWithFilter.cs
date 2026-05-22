@@ -37,7 +37,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.User_Controls
 
         private bool _FilterEnable = true;
 
-        public bool FilterEnable { get { return _FilterEnable; } 
+        public bool FilterEnabled { get { return _FilterEnable; } 
         set {
                 _FilterEnable = value;
                 groupBox1.Enabled = value;
@@ -75,7 +75,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.User_Controls
                     break;
             }
 
-            if (OnPersonSelected != null && FilterEnable)
+            if (OnPersonSelected != null && FilterEnabled)
                 // Raise the event with a parameter
                 OnPersonSelected(ctrPersonDetails2.PersonID);
         }

@@ -55,7 +55,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
 
                 _LocalDrivingLicenseApplication = new clsLocalDrivingLicenseApplication();
                 _IsPersonFound = false;
-                ctrPersonDetailsWithFilter1.FilterEnable = true;
+                ctrPersonDetailsWithFilter1.FilterEnabled = true;
                 tbApplicationInfo.Enabled = false;
                 btnReset.Visible = true;
                 ctrPersonDetailsWithFilter1.FilterFocus();
@@ -70,7 +70,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
                 lblTitle.Text = "Update Local Driving License Application";
                 this.Text = "Update Local Driving License Application";
 
-                ctrPersonDetailsWithFilter1.FilterEnable = false;
+                ctrPersonDetailsWithFilter1.FilterEnabled = false;
                 tbApplicationInfo.Enabled = true;
                 btnReset.Visible = false;
                 _IsPersonFound = true;
@@ -116,7 +116,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
             {
                 tbApplicationInfo.Enabled = true;
                 tabControl1.SelectedTab = tbApplicationInfo;
-                ctrPersonDetailsWithFilter1.FilterEnable = false;
+                ctrPersonDetailsWithFilter1.FilterEnabled = false;
             }
             else
             {

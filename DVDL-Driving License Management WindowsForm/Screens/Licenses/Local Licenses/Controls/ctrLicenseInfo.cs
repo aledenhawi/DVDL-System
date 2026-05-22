@@ -21,6 +21,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
         public int LicenseID { get => _LicenseID; }
 
         public clsLicense SelectedLicenseInfo { get => _License; }
+
         public ctrLicenseInfo()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
                 pbPersonPic.Image = (_License.DriverInfo.PersonInfo.Gender == clsPerson.GenderType.Male) ? Resources.Male : Resources.Female;
         }
 
-        public void LoadLicenseData(int LicenseID) 
+        public void LoadInfo(int LicenseID) 
         {
             _LicenseID = LicenseID;
             _License = clsLicense.Find(LicenseID);
@@ -63,12 +64,9 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
             lblExpirationDate.Text = _License.ExpirationDate.ToShortDateString();
             lblIssueDate.Text = _License.IssueDate.ToShortDateString();
             lblName.Text = _License.DriverInfo.PersonInfo.GetFullName();
-            lblNotes.Text = (string.IsNullOrEmpty(_License.Notes)) ? "Nothing" : _License.Notes;
+            lblNotes.Text = (string.IsNullOrEmpty(_License.Notes)) ? "No Notes" : _License.Notes;
             lblNationalNo.Text = _License.DriverInfo.PersonInfo.NationalNo;
-
-            // Check it later Detained
-
-            lblIsDetained.Text = "false";
+            lblIsDetained.Text = (_License.IsDetained)? "true":"false";
             lblIssueReason.Text = _License.IssueReasonText;
             lblLicenseID.Text = _License.LicenseID.ToString();
 

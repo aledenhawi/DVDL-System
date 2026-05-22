@@ -45,6 +45,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddNewPerson = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeopleList)).BeginInit();
             this.cmsPeopleList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -160,16 +161,16 @@
             this.cmbPeopleFiltring.FormattingEnabled = true;
             this.cmbPeopleFiltring.Items.AddRange(new object[] {
             "None",
-            "PersonID",
+            "Person ID",
             "National No.",
             "First Name",
             "Second Name",
             "Third Name",
             "Last Name",
-            "Country Name",
             "Gender",
-            "Gmail",
-            "Phone"});
+            "Phone",
+            "Email",
+            "Country Name"});
             this.cmbPeopleFiltring.Location = new System.Drawing.Point(104, 277);
             this.cmbPeopleFiltring.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cmbPeopleFiltring.Name = "cmbPeopleFiltring";
@@ -240,12 +241,29 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkCyan;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.button1.Image = global::DVDL_Driving_License_Management_WindowsForm.Properties.Resources.close__1_;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(1255, 672);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(157, 59);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Close_Click);
+            // 
             // frmManagePeople
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1425, 742);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddNewPerson);
             this.Controls.Add(this.lblTotalRecords);
@@ -287,5 +305,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsPhoneCall;
         private System.Windows.Forms.TextBox txbFiltringPeople;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }

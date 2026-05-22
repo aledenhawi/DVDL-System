@@ -107,7 +107,7 @@
             // 
             this.ctrPersonDetailsWithFilter1.AddNewVisablity = true;
             this.ctrPersonDetailsWithFilter1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ctrPersonDetailsWithFilter1.FilterEnable = true;
+            this.ctrPersonDetailsWithFilter1.FilterEnabled = true;
             this.ctrPersonDetailsWithFilter1.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ctrPersonDetailsWithFilter1.Location = new System.Drawing.Point(33, 8);
             this.ctrPersonDetailsWithFilter1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);

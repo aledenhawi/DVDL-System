@@ -27,7 +27,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
 
         private void frmLicenseInfo_Load(object sender, EventArgs e)
         {
-            ctrLicenseInfo1.LoadLicenseData(_LicenseID);
+            ctrLicenseInfo1.LoadInfo(_LicenseID);
         }
     }
 }

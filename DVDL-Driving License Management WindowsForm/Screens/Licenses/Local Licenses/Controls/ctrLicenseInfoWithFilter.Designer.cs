@@ -28,21 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrLicenseInfo1 = new DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Licenses.Controls.ctrLicenseInfo();
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.btnFindLicense = new System.Windows.Forms.Button();
             this.txbLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ctrLicenseInfo1 = new DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Licenses.Controls.ctrLicenseInfo();
             this.gbFilter.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ctrLicenseInfo1
-            // 
-            this.ctrLicenseInfo1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ctrLicenseInfo1.Location = new System.Drawing.Point(0, 112);
-            this.ctrLicenseInfo1.Name = "ctrLicenseInfo1";
-            this.ctrLicenseInfo1.Size = new System.Drawing.Size(1086, 474);
-            this.ctrLicenseInfo1.TabIndex = 0;
             // 
             // gbFilter
             // 
@@ -87,6 +79,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "License ID : ";
             // 
+            // ctrLicenseInfo1
+            // 
+            this.ctrLicenseInfo1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ctrLicenseInfo1.Location = new System.Drawing.Point(0, 112);
+            this.ctrLicenseInfo1.Name = "ctrLicenseInfo1";
+            this.ctrLicenseInfo1.Size = new System.Drawing.Size(1086, 402);
+            this.ctrLicenseInfo1.TabIndex = 0;
+            // 
             // ctrLicenseInfoWithFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -95,7 +95,7 @@
             this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.ctrLicenseInfo1);
             this.Name = "ctrLicenseInfoWithFilter";
-            this.Size = new System.Drawing.Size(1084, 586);
+            this.Size = new System.Drawing.Size(1084, 514);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
             this.ResumeLayout(false);

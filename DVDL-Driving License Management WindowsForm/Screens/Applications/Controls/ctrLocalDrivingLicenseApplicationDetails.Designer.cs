@@ -188,27 +188,30 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(393, 39);
+            this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(370, 39);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(195, 24);
+            this.label8.Size = new System.Drawing.Size(220, 24);
             this.label8.TabIndex = 10;
             this.label8.Text = "Applied For License :";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(449, 87);
+            this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(437, 87);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(139, 24);
+            this.label7.Size = new System.Drawing.Size(151, 24);
             this.label7.TabIndex = 9;
             this.label7.Text = "Passed Tests :";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(64, 39);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(114, 24);
+            this.label6.Size = new System.Drawing.Size(126, 24);
             this.label6.TabIndex = 8;
             this.label6.Text = "D.L.AppID :";
             // 

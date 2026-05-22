@@ -132,9 +132,6 @@ namespace DVDL_Driving_License_Management_WindowsForm
                 case "Gender":
                     FilterColumn = "Gender";
                     break;
-                case "Date Of Birth":
-                    FilterColumn = "Date Of Birth";
-                    break;
                 case "Phone":
                     FilterColumn = "Phone";
                     break;
@@ -250,5 +247,9 @@ namespace DVDL_Driving_License_Management_WindowsForm
 
         }
 
+        private void Close_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

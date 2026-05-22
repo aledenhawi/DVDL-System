@@ -125,11 +125,15 @@ namespace DVDL_BusinessLayer
            return clsDriverData.IsDriverExistsByPersonID(PersonID);
         }
 
-        public DataTable GetDriverLicenses() 
+        public static DataTable GetDriverLicenses(int DriverID) 
         {
-        return clsLicense.GetDriverLicenses(this.DriverID);
+        return clsLicense.GetDriverLicenses(DriverID);
         }
-        // Check It later Add GetInternationalLicenses
+
+        public static DataTable GetDriverInternationalLicenses(int DriverID) 
+        {
+            return clsInternationalLicense.GetDriverInternationalLicense(DriverID);
+        }
 
     }
 }

@@ -37,7 +37,7 @@
             // 
             this.ctrPersonDetailsWithFilter1.AddNewVisablity = true;
             this.ctrPersonDetailsWithFilter1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ctrPersonDetailsWithFilter1.FilterEnable = true;
+            this.ctrPersonDetailsWithFilter1.FilterEnabled = true;
             this.ctrPersonDetailsWithFilter1.Location = new System.Drawing.Point(12, 109);
             this.ctrPersonDetailsWithFilter1.Name = "ctrPersonDetailsWithFilter1";
             this.ctrPersonDetailsWithFilter1.Size = new System.Drawing.Size(1032, 497);
@@ -68,7 +68,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Close_Click);
             // 
             // frmFindPerson
             // 

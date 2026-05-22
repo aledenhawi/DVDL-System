@@ -1,7 +1,12 @@
 ﻿using DVDL_Driving_License_Management_WindowsForm.Screens;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Applications;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Internatinoal_License;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Repleacment_Application;
 using DVDL_Driving_License_Management_WindowsForm.Screens.ApplicationsType;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Basic;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Drivers;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.International_Licenses;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Licenses;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Tests.TestTypes;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Users;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Users.Controls;
@@ -104,6 +109,39 @@ namespace DVDL_Driving_License_Management_WindowsForm
             frmLocalDrivingLicenseApplications localDrivingLicenseApplications = new frmLocalDrivingLicenseApplications();
             localDrivingLicenseApplications.MdiParent = this;
             localDrivingLicenseApplications.Show();
+        }
+
+        private void sdDriver_Click(object sender, EventArgs e)
+        {
+            frmManageDrivers Drivers = new frmManageDrivers();
+            Drivers.MdiParent = this;
+            Drivers.Show();
+        }
+
+        private void tsIssueNewInternationalLicense_Click(object sender, EventArgs e)
+        {
+            frmAddNewInternationalLicense newInternationalLicense = new frmAddNewInternationalLicense();
+            newInternationalLicense.ShowDialog();
+            
+        }
+
+        private void tsInternationalDrivingLicenseList_Click(object sender, EventArgs e)
+        {
+            frmListInt_LicenseApplicatrions internationalLicenseInfo = new frmListInt_LicenseApplicatrions();
+            internationalLicenseInfo.MdiParent = this;
+            internationalLicenseInfo.Show();
+        }
+
+        private void tsRenewDrivingLicense_Click(object sender, EventArgs e)
+        {
+            frmRenewDrivingLicense renewDrivingLicense = new frmRenewDrivingLicense();
+            renewDrivingLicense.ShowDialog();
+        }
+
+        private void tsReplacementforlostordamaged_Click(object sender, EventArgs e)
+        {
+            frmReplacmentApplication replacmentApplication = new frmReplacmentApplication();
+            replacmentApplication.ShowDialog();
         }
     }
 }

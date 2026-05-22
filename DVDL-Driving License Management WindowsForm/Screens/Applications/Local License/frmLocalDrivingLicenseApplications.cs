@@ -1,4 +1,5 @@
 ﻿using DVDL_BusinessLayer;
+using DVDL_Driving_License_Management_WindowsForm.Screens.Licenses;
 using DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Licenses;
 using DVDL_Driving_License_Management_WindowsForm.Screens.TestAppointments;
 using System;
@@ -268,7 +269,10 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Applications
 
         private void tsShowPersonLicenseHistroy_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This feature is not implemented yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find((int)dgvLocalDrivingLicenseApplicationsList.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value);
+
+            frmShowPersonDrivingLicensesHistory frm = new frmShowPersonDrivingLicensesHistory(localDrivingLicenseApplication.ApplicantPersonID);
+            frm.ShowDialog();
         }
 
         private void visionTestToolStripMenuItem_Click(object sender, EventArgs e)

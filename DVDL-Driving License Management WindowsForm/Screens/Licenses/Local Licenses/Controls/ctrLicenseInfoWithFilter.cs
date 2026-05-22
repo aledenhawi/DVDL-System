@@ -19,7 +19,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
             InitializeComponent();
         }
 
-        public Action<int> OnLicenseSelected;
+        public event Action<int> OnLicenseSelected;
 
         protected virtual void LicenseSelected(int LicenseID) 
         {
@@ -40,18 +40,29 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
                 gbFilter.Enabled = value; 
             } 
         }
+        private int _LicenseID = -1;
 
          public int LicenseID { get => ctrLicenseInfo1.LicenseID; }
          public clsLicense SelectedLicenseInfo { get => ctrLicenseInfo1.SelectedLicenseInfo; }
 
+        public void TxbLicenseIDFocus()
+        {
+            txbLicenseID.Focus();
+        }
+
         private void btnFindLicense_Click(object sender, EventArgs e)
         {
-            ctrLicenseInfo1.LoadLicenseData(int.Parse(txbLicenseID.Text));
+            if(txbLicenseID.Text.Trim() == "")
+            {
+                MessageBox.Show("Please enter a License ID to search.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txbLicenseID.Focus();
+                return;
+            }
 
-            if (OnLicenseSelected != null && FilterEnable)
-                // Raise the event with a parameter
-                OnLicenseSelected(ctrLicenseInfo1.LicenseID);
+            _LicenseID = int.Parse(txbLicenseID.Text);
+            LoadLicenseInfo(_LicenseID);
         }
+
         private void txbLicenseID_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == (char)Keys.Enter) 
@@ -63,6 +74,14 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Licenses.Local_Lic
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
-
+        public void LoadLicenseInfo(int LicenseID)
+        {
+            _LicenseID = LicenseID;
+            txbLicenseID.Text = LicenseID.ToString();
+            ctrLicenseInfo1.LoadInfo(LicenseID);
+            if (OnLicenseSelected != null && FilterEnable)
+                // Raise the event with a parameter
+                OnLicenseSelected(ctrLicenseInfo1.LicenseID);
+        }
     }
 }

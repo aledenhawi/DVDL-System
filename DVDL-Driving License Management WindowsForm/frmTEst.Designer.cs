@@ -28,13 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ctrInternationalLicenseApplicartionDetails1 = new DVDL_Driving_License_Management_WindowsForm.Screens.Applications.Controls.ctrInternationalLicenseApplicartionDetails();
             this.SuspendLayout();
+            // 
+            // ctrInternationalLicenseApplicartionDetails1
+            // 
+            this.ctrInternationalLicenseApplicartionDetails1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ctrInternationalLicenseApplicartionDetails1.LocalLicenseID = 0;
+            this.ctrInternationalLicenseApplicartionDetails1.Location = new System.Drawing.Point(12, 204);
+            this.ctrInternationalLicenseApplicartionDetails1.Name = "ctrInternationalLicenseApplicartionDetails1";
+            this.ctrInternationalLicenseApplicartionDetails1.Size = new System.Drawing.Size(1087, 266);
+            this.ctrInternationalLicenseApplicartionDetails1.TabIndex = 0;
             // 
             // frmTEst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1137, 490);
+            this.ClientSize = new System.Drawing.Size(1137, 691);
+            this.Controls.Add(this.ctrInternationalLicenseApplicartionDetails1);
             this.Name = "frmTEst";
             this.Text = "frmTEst";
             this.Load += new System.EventHandler(this.frmTEst_Load);
@@ -43,5 +54,7 @@
         }
 
         #endregion
+
+        private Screens.Applications.Controls.ctrInternationalLicenseApplicartionDetails ctrInternationalLicenseApplicartionDetails1;
     }
 }

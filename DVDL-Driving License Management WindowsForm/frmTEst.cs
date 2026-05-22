@@ -19,7 +19,7 @@ namespace DVDL_Driving_License_Management_WindowsForm
 
         private void frmTEst_Load(object sender, EventArgs e)
         {
-            
+            ctrInternationalLicenseApplicartionDetails1.ResetDefualtValues();
         }
 
         private void button1_Click(object sender, EventArgs e)

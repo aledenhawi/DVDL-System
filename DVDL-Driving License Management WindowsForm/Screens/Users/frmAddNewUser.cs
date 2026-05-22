@@ -72,7 +72,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Users
         {
             _User = clsUser.Find(_UserID);
 
-            ctrPersonDetailsWithFilter1.FilterEnable = false;
+            ctrPersonDetailsWithFilter1.FilterEnabled = false;
 
             if (_User == null)
             {
@@ -123,7 +123,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Users
                 {
                     tbLoginInfo.Enabled = true;
                     tabControl.SelectedTab = tbLoginInfo;
-                    ctrPersonDetailsWithFilter1.FilterEnable = false;
+                    ctrPersonDetailsWithFilter1.FilterEnabled = false;
                 }
             }
             else
@@ -219,7 +219,7 @@ namespace DVDL_Driving_License_Management_WindowsForm.Screens.Users
         private void btnReset_Click(object sender, EventArgs e)
         {
             _IsPersonFound = false;
-            ctrPersonDetailsWithFilter1.FilterEnable = true;
+            ctrPersonDetailsWithFilter1.FilterEnabled = true;
             ctrPersonDetailsWithFilter1.ResetPersonInfo();
             txbConfirmPasswrod.Text = "";
             txbPassword.Text = "";
